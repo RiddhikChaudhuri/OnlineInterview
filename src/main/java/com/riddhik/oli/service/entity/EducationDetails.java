@@ -1,4 +1,4 @@
-package com.oli.service.entity;
+package com.riddhik.oli.service.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
