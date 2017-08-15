@@ -17,37 +17,44 @@ public class Skill {
     @Column(name = "SKILL_NAME")
     private String skillName;
 
-    public Integer getSkillID() {
-        return skillID;
-    }
-
-    public void setSkillID(Integer skillID) {
-        this.skillID = skillID;
-    }
-
-    public String getSkillName() {
-        return skillName;
-    }
-
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public Skill() {
+	super();
+	// TODO Auto-generated constructor stub
     }
 
     public Skill(Integer skillID, String skillName) {
-        super();
-        this.skillID = skillID;
-        this.skillName = skillName;
-    }
-
-    public Skill() {
-        super();
-        // TODO Auto-generated constructor stub
+	super();
+	this.skillID = skillID;
+	this.skillName = skillName;
     }
 
     public Skill(Integer skillID, String skillName, ServiceRequest serviceRequest) {
-        super();
-        this.skillID = skillID;
-        this.skillName = skillName;
+	super();
+	this.skillID = skillID;
+	this.skillName = skillName;
+    }
+
+    public Integer getSkillID() {
+	return skillID;
+    }
+
+    public String getSkillName() {
+	return skillName;
+    }
+
+    public void setSkillID(Integer skillID) {
+	this.skillID = skillID;
+    }
+
+    public void setSkillName(String skillName) {
+	this.skillName = skillName;
+    }
+
+    @Override
+    public String toString() {
+	return "Skill [skillID=" + skillID + ", skillName=" + skillName + ", getSkillID()=" + getSkillID()
+		+ ", getSkillName()=" + getSkillName() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+		+ ", toString()=" + super.toString() + "]";
     }
 
 }

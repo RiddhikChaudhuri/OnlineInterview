@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "SERVICE_REQUEST")
 public class ServiceRequest {
@@ -26,7 +28,8 @@ public class ServiceRequest {
     @Column(name = "JOB_TITLE")
     private String jobTitle;
 
-    @OneToMany(targetEntity = Skill.class,cascade=CascadeType.ALL)
+    @OneToMany(targetEntity = Skill.class, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Skill> keySkills;
 
     @Column
@@ -39,66 +42,77 @@ public class ServiceRequest {
     @Column(name = "JOB_DESCRIPTION")
     @Lob
     private String jobDescription;
-    
-    @OneToOne(targetEntity = ContactDetails.class,cascade=CascadeType.ALL)
+
+    @OneToOne(targetEntity = ContactDetails.class, cascade = CascadeType.ALL)
+    @JsonBackReference
     private ContactDetails contactDetails;
 
-    public Integer getJobID() {
-        return jobID;
-    }
-
-    public void setJobID(Integer jobID) {
-        this.jobID = jobID;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-    
-
-    public List<Skill> getKeySkills() {
-        return keySkills;
-    }
-
-    public void setKeySkills(List<Skill> keySkills) {
-        this.keySkills = keySkills;
-    }
-
     public String getCompanyProfile() {
-        return companyProfile;
+	return companyProfile;
     }
 
-    public void setCompanyProfile(String companyProfile) {
-        this.companyProfile = companyProfile;
+    public ContactDetails getContactDetails() {
+	return this.contactDetails;
     }
 
     public CandidateProfile getDesiredCandidateProfile() {
-        return desiredCandidateProfile;
-    }
-
-    public void setDesiredCandidateProfile(CandidateProfile desiredCandidateProfile) {
-        this.desiredCandidateProfile = desiredCandidateProfile;
+	return desiredCandidateProfile;
     }
 
     public String getJobDescription() {
-        return jobDescription;
+	return jobDescription;
     }
 
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
+    public Integer getJobID() {
+	return jobID;
     }
 
-    
-    public ContactDetails getContactDetails() {
-        return this.contactDetails;
+    public String getJobTitle() {
+	return jobTitle;
+    }
+
+    public List<Skill> getKeySkills() {
+	return keySkills;
+    }
+
+    public void setCompanyProfile(String companyProfile) {
+	this.companyProfile = companyProfile;
     }
 
     public void setContactDetails(ContactDetails contactDetails) {
-        this.contactDetails = contactDetails;
+	this.contactDetails = contactDetails;
+    }
+
+    public void setDesiredCandidateProfile(CandidateProfile desiredCandidateProfile) {
+	this.desiredCandidateProfile = desiredCandidateProfile;
+    }
+
+    public void setJobDescription(String jobDescription) {
+	this.jobDescription = jobDescription;
+    }
+
+    public void setJobID(Integer jobID) {
+	this.jobID = jobID;
+    }
+
+    public void setJobTitle(String jobTitle) {
+	this.jobTitle = jobTitle;
+    }
+
+    public void setKeySkills(List<Skill> keySkills) {
+	this.keySkills = keySkills;
+    }
+
+    @Override
+    public String toString() {
+	return "ServiceRequest [jobID=" + jobID + ", jobTitle=" + jobTitle + ", keySkills=" + keySkills
+		+ ", companyProfile=" + companyProfile + ", desiredCandidateProfile=" + desiredCandidateProfile
+		+ ", jobDescription=" + jobDescription + ", contactDetails=" + contactDetails + ", getJobID()="
+		+ getJobID() + ", getJobTitle()=" + getJobTitle() + ", getKeySkills()=" + getKeySkills()
+		+ ", getCompanyProfile()=" + getCompanyProfile() + ", getDesiredCandidateProfile()="
+		+ getDesiredCandidateProfile() + ", getJobDescription()=" + getJobDescription()
+		+ ", getContactDetails()=" + getContactDetails() + ", getClass()=" + getClass() + ", hashCode()="
+		+ hashCode() + ", toString()=" + super.toString() + "]";
     }
 
 }
