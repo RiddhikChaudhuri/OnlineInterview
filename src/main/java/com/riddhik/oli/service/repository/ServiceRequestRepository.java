@@ -1,17 +1,19 @@
 package com.riddhik.oli.service.repository;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.annotation.Validated;
 
-import com.riddhik.oli.service.entity.ServiceRequest;
+import com.riddhik.oli.service.entity.ServiceRequestEntity;
 
 @Repository
-public interface ServiceRequestRepository extends CrudRepository<ServiceRequest, Integer> {
+@Validated
+public interface ServiceRequestRepository extends CrudRepository<ServiceRequestEntity, Integer> {
 
-    public List<ServiceRequest> findByJobDescription(String jobDescription);
+    public ArrayList<ServiceRequestEntity> findByJobDescription(String jobDescription);
 
-    public ServiceRequest findByContactDetailsRecruitedId(Integer position);
+    public ServiceRequestEntity findByContactDetailsRecruitedId(Integer position);
 
 }
