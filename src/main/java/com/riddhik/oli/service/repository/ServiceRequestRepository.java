@@ -1,6 +1,6 @@
 package com.riddhik.oli.service.repository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,8 +12,8 @@ import com.riddhik.oli.service.entity.ServiceRequestEntity;
 @Validated
 public interface ServiceRequestRepository extends CrudRepository<ServiceRequestEntity, Integer> {
 
-    public ArrayList<ServiceRequestEntity> findByJobDescription(String jobDescription);
-
     public ServiceRequestEntity findByContactDetailsRecruitedId(Integer position);
+
+    public List<ServiceRequestEntity> findByJobDescription(String jobDescription);
 
 }
