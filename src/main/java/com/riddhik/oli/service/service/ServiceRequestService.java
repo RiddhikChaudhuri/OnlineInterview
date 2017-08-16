@@ -1,14 +1,13 @@
 package com.riddhik.oli.service.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.riddhik.oli.service.domain.ServiceRequest;
-import com.riddhik.oli.service.entity.ServiceRequestEntity;
 
 public interface ServiceRequestService {
 
-    public ArrayList<ServiceRequestEntity> searchByJobDescription(String jobDescription);
-
     public void createNewServiceRequest(ServiceRequest serviceRequest);
+
+    public List<ServiceRequest> searchByJobDescription(String jobDescription);
 
 }

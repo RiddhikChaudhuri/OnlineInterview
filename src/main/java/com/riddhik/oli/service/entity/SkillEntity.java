@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "skill")
 public class SkillEntity {
@@ -24,8 +22,7 @@ public class SkillEntity {
     private String skillName;
 
     @ManyToOne
-    @JoinColumn(name = "serviceRequestID", nullable = false)
-    @JsonManagedReference("skillDetails")
+    @JoinColumn(name = "SERVICE_REQUEST_ID")
     private ServiceRequestEntity serviceRequestEntity;
 
     public SkillEntity() {
@@ -48,7 +45,7 @@ public class SkillEntity {
 	this.skillName = skillName;
     }
 
-    public ServiceRequestEntity getServiceRequestEntity() {
+    public ServiceRequestEntity getServiceRequest() {
 	return serviceRequestEntity;
     }
 
@@ -60,8 +57,8 @@ public class SkillEntity {
 	return skillName;
     }
 
-    public void setServiceRequestEntity(ServiceRequestEntity serviceRequestEntity) {
-	this.serviceRequestEntity = serviceRequestEntity;
+    public void setServiceRequest(ServiceRequestEntity serviceRequest) {
+	this.serviceRequestEntity = serviceRequest;
     }
 
     public void setSkillID(Integer skillID) {

@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
@@ -33,8 +33,7 @@ public class ServiceRequestEntity {
     @Column(name = "JOB_TITLE")
     private String jobTitle;
 
-    @OneToMany(mappedBy = "serviceRequestEntity")
-    @JsonBackReference("skillDetails")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceRequestEntity", fetch = FetchType.EAGER)
     private List<SkillEntity> keySkills;
 
     @Column
@@ -49,7 +48,6 @@ public class ServiceRequestEntity {
     private String jobDescription;
 
     @OneToOne(targetEntity = ContactDetailsEntity.class, cascade = CascadeType.ALL)
-    @JsonBackReference("contactDetails")
     private ContactDetailsEntity contactDetails;
 
     private Date createdDate;
