@@ -21,7 +21,7 @@ import com.riddhik.oli.service.serviceImpl.ServiceRequestServiceImpl;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @ContextConfiguration(classes = { OnlineApplication.class, ServiceRequestServiceImpl.class })
-@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforeTestRun.sql")
+//@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforeTestRun.sql")
 public class ServiceRepositoryTest {
 
     /*

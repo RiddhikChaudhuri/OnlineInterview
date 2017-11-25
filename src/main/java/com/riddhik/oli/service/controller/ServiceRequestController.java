@@ -23,27 +23,27 @@ import com.riddhik.oli.service.service.ServiceRequestService;
 @RequestMapping("/servicerequest")
 public class ServiceRequestController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ServiceRequestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ServiceRequestController.class);
 
-    @Autowired
-    ServiceRequestService serviceRequestService;
+	@Autowired
+	ServiceRequestService serviceRequestService;
 
-    @RequestMapping(value = "/createNewService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
-    public HttpStatus createNewServiceRequest(@RequestBody ServiceRequest serviceRequest) {
-	serviceRequest.setCreatedDate(new Date());
-	serviceRequestService.createNewServiceRequest(serviceRequest);
-	return HttpStatus.CREATED;
-    }
-
-    @RequestMapping(value = "/listAllservice", method = RequestMethod.GET)
-    public ResponseEntity<List<ServiceRequest>> listAllServiceRequestBy(
-	    @RequestParam("jobDescription") String jobDescription) {
-	logger.info("Entering into ListAll Jobs by Description method");
-	List<ServiceRequest> serviceRequests = serviceRequestService.searchByJobDescription(jobDescription);
-	if (serviceRequests.isEmpty()) {
-	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	@RequestMapping(value = "/createNewService", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
+	public HttpStatus createNewServiceRequest(@RequestBody ServiceRequest serviceRequest) {
+		serviceRequest.setCreatedDate(new Date());
+		serviceRequestService.createNewServiceRequest(serviceRequest);
+		return HttpStatus.CREATED;
 	}
-	return new ResponseEntity<List<ServiceRequest>>(serviceRequests, HttpStatus.OK);
-    }
+
+	@RequestMapping(value = "/listAllservice", method = RequestMethod.GET)
+	public ResponseEntity<List<ServiceRequest>> listAllServiceRequestBy(
+			@RequestParam("jobDescription") String jobDescription) {
+		logger.info("Entering into ListAll Jobs by Description method");
+		List<ServiceRequest> serviceRequests = serviceRequestService.searchByJobDescription(jobDescription);
+		if (serviceRequests.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<ServiceRequest>>(serviceRequests, HttpStatus.OK);
+	}
 
 }
