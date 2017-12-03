@@ -6,4 +6,6 @@ import com.riddhik.oli.service.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findOneByUsername(String username);
+	
+	public User save(User user);
 }

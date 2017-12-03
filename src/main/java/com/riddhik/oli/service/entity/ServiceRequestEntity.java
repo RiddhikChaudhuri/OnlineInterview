@@ -7,14 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,130 +24,126 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 @Table(name = "SERVICE_REQUEST")
 public class ServiceRequestEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SERVICE_REQUEST_ID")
-    private Integer serviceRequestID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SERVICE_REQUEST_ID")
+	private Integer serviceRequestID;
 
-    @Column(name = "JOB_TITLE")
-    private String jobTitle;
+	public Integer getServiceRequestID() {
+		return serviceRequestID;
+	}
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceRequestEntity", fetch = FetchType.EAGER)
-    private List<SkillEntity> keySkills;
+	public void setServiceRequestID(Integer serviceRequestID) {
+		this.serviceRequestID = serviceRequestID;
+	}
 
-    @Column
-    @Lob
-    private String companyProfile;
+	@Column(name = "JOB_TITLE")
+	private String jobTitle;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "service_request_skills", joinColumns = @JoinColumn(name = "SERVICE_REQUEST_ID", referencedColumnName = "SERVICE_REQUEST_ID"), inverseJoinColumns = @JoinColumn(name = "SKILL_ID", referencedColumnName = "SKILL_ID"))
+	private List<SkillEntity> keySkills;
 
-    @Embedded
-    private CandidateProfileEntity desiredCandidateProfile;
+	@Column
+	@Lob
+	private String companyProfile;
 
-    @Column(name = "JOB_DESCRIPTION")
-    @Lob
-    private String jobDescription;
+	@Embedded
+	private CandidateProfileEntity desiredCandidateProfile;
 
-    @OneToOne(targetEntity = ContactDetailsEntity.class, cascade = CascadeType.ALL)
-    private ContactDetailsEntity contactDetails;
+	@Column(name = "JOB_DESCRIPTION")
+	@Lob
+	private String jobDescription;
 
-    private Date createdDate;
+	@OneToOne(targetEntity = ContactDetailsEntity.class, cascade = CascadeType.ALL)
+	private ContactDetailsEntity contactDetails;
 
-    public ServiceRequestEntity() {
-	super();
-	// TODO Auto-generated constructor stub
-    }
+	private Date createdDate;
 
-    public ServiceRequestEntity(String companyProfile, Date createdDate, String jobDescription, String jobTitle,
-	    List<SkillEntity> keySkills, CandidateProfileEntity desiredCandidateProfile,
-	    ContactDetailsEntity contactDetails) {
+	public ServiceRequestEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	super();
-	this.jobTitle = jobTitle;
-	this.companyProfile = companyProfile;
-	this.jobDescription = jobDescription;
-	this.keySkills = keySkills;
-	this.createdDate = createdDate;
-	this.desiredCandidateProfile = desiredCandidateProfile;
-	this.contactDetails = contactDetails;
-    }
+	public ServiceRequestEntity(String companyProfile, Date createdDate, String jobDescription, String jobTitle,
+			List<SkillEntity> keySkills, CandidateProfileEntity desiredCandidateProfile,
+			ContactDetailsEntity contactDetails) {
 
-    public String getCompanyProfile() {
-	return companyProfile;
-    }
+		super();
+		this.jobTitle = jobTitle;
+		this.companyProfile = companyProfile;
+		this.jobDescription = jobDescription;
+		this.keySkills = keySkills;
+		this.createdDate = createdDate;
+		this.desiredCandidateProfile = desiredCandidateProfile;
+		this.contactDetails = contactDetails;
+	}
 
-    public ContactDetailsEntity getContactDetails() {
-	return this.contactDetails;
-    }
+	public String getCompanyProfile() {
+		return companyProfile;
+	}
 
-    @JsonSerialize(using = DateSerializer.class)
-    public Date getCreatedDate() {
-	return createdDate;
-    }
+	public ContactDetailsEntity getContactDetails() {
+		return this.contactDetails;
+	}
 
-    public CandidateProfileEntity getDesiredCandidateProfile() {
-	return desiredCandidateProfile;
-    }
+	@JsonSerialize(using = DateSerializer.class)
+	public Date getCreatedDate() {
+		return createdDate;
+	}
 
-    public String getJobDescription() {
-	return jobDescription;
-    }
+	public CandidateProfileEntity getDesiredCandidateProfile() {
+		return desiredCandidateProfile;
+	}
 
-    public Integer getJobID() {
-	return serviceRequestID;
-    }
+	public String getJobDescription() {
+		return jobDescription;
+	}
 
-    public String getJobTitle() {
-	return jobTitle;
-    }
+	public Integer getserviceRequestID() {
+		return serviceRequestID;
+	}
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "SERVICE_REQUEST_skill", joinColumns = {
-	    @JoinColumn(name = "SERVICE_REQUEST_ID") }, inverseJoinColumns = { @JoinColumn(name = "SKILL_ID") })
-    public List<SkillEntity> getKeySkills() {
-	return keySkills;
-    }
+	public String getJobTitle() {
+		return jobTitle;
+	}
 
-    public void setCompanyProfile(String companyProfile) {
-	this.companyProfile = companyProfile;
-    }
+	
+	public List<SkillEntity> getKeySkills() {
+		return keySkills;
+	}
 
-    public void setContactDetails(ContactDetailsEntity contactDetails) {
-	this.contactDetails = contactDetails;
-    }
+	public void setCompanyProfile(String companyProfile) {
+		this.companyProfile = companyProfile;
+	}
 
-    public void setCreatedDate(Date createdDate) {
-	this.createdDate = createdDate;
-    }
+	public void setContactDetails(ContactDetailsEntity contactDetails) {
+		this.contactDetails = contactDetails;
+	}
 
-    public void setDesiredCandidateProfile(CandidateProfileEntity desiredCandidateProfile) {
-	this.desiredCandidateProfile = desiredCandidateProfile;
-    }
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public void setJobDescription(String jobDescription) {
-	this.jobDescription = jobDescription;
-    }
+	public void setDesiredCandidateProfile(CandidateProfileEntity desiredCandidateProfile) {
+		this.desiredCandidateProfile = desiredCandidateProfile;
+	}
 
-    public void setJobID(Integer jobID) {
-	this.serviceRequestID = jobID;
-    }
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
 
-    public void setJobTitle(String jobTitle) {
-	this.jobTitle = jobTitle;
-    }
+	public void setJobID(Integer jobID) {
+		this.serviceRequestID = jobID;
+	}
 
-    public void setKeySkills(List<SkillEntity> keySkills) {
-	this.keySkills = keySkills;
-    }
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
 
-    @Override
-    public String toString() {
-	return "ServiceRequest [jobID=" + serviceRequestID + ", jobTitle=" + jobTitle + ", keySkills=" + keySkills
-		+ ", companyProfile=" + companyProfile + ", desiredCandidateProfile=" + desiredCandidateProfile
-		+ ", jobDescription=" + jobDescription + ", contactDetails=" + contactDetails + ", getJobID()="
-		+ getJobID() + ", getJobTitle()=" + getJobTitle() + ", getKeySkills()=" + getKeySkills()
-		+ ", getCompanyProfile()=" + getCompanyProfile() + ", getDesiredCandidateProfile()="
-		+ getDesiredCandidateProfile() + ", getJobDescription()=" + getJobDescription()
-		+ ", getContactDetails()=" + getContactDetails() + ", getClass()=" + getClass() + ", hashCode()="
-		+ hashCode() + ", toString()=" + super.toString() + "]";
-    }
+	public void setKeySkills(List<SkillEntity> keySkills) {
+		this.keySkills = keySkills;
+	}
+
 
 }

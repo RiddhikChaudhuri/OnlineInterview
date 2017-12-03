@@ -40,6 +40,15 @@ public class User implements UserDetails {
 
 		return authorities;
 	}
+	
+	public User(String userName,String password) {
+        this.username = userName;
+        this.password = password;
+    }
+
+	public User() {
+		super();
+	}
 
 	@Override
 	public boolean isAccountNonExpired() {

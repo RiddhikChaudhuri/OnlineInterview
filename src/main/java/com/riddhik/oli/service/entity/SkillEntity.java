@@ -1,12 +1,13 @@
 package com.riddhik.oli.service.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +22,8 @@ public class SkillEntity {
     @Column(name = "SKILL_NAME")
     private String skillName;
 
-    @ManyToOne
-    @JoinColumn(name = "SERVICE_REQUEST_ID")
-    private ServiceRequestEntity serviceRequestEntity;
+    @ManyToMany(mappedBy = "keySkills")
+    private List<ServiceRequestEntity> serviceRequestEntity;
 
     public SkillEntity() {
 	super();
@@ -45,7 +45,8 @@ public class SkillEntity {
 	this.skillName = skillName;
     }
 
-    public ServiceRequestEntity getServiceRequest() {
+    
+    public List<ServiceRequestEntity> getServiceRequest() {
 	return serviceRequestEntity;
     }
 
@@ -57,7 +58,7 @@ public class SkillEntity {
 	return skillName;
     }
 
-    public void setServiceRequest(ServiceRequestEntity serviceRequest) {
+    public void setServiceRequest(List<ServiceRequestEntity> serviceRequest) {
 	this.serviceRequestEntity = serviceRequest;
     }
 
