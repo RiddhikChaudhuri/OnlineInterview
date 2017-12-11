@@ -34,7 +34,7 @@ public class UserSecurityDetail implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return new String(user.getPassword());
 	}
 
 	@Override

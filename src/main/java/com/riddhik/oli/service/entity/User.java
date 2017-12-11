@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "users")
@@ -33,11 +34,12 @@ public class User implements Serializable {
 	@Column(name = "last_name", length = 100)
 	private String lastName;
 
-	@Column(name = "email", length = 100)
+	@Column(name = "email", length = 100, unique = true)
+	@Email
 	private String email;
 
 	@Column(name = "password", length = 255)
-	private String password;
+	private char[] password;
 
 	public Long getId() {
 		return id;
@@ -71,11 +73,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public char[] getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(char[] password) {
+		
 		this.password = password;
 	}
 }

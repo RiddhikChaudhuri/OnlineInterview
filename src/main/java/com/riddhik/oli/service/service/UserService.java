@@ -7,5 +7,7 @@ public interface UserService {
 	public User findByEmail(String username);
 
 	public void save(User user);
+	
+	public boolean emailExists(String emailID);
 
 }

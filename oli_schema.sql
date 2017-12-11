@@ -47,14 +47,15 @@ create table skill (
 )
 
 create table users (
-        user_id bigint not null auto_increment,
-        enabled bit not null,
-        password varchar(255) not null,
-        username varchar(255) not null,
-        primary key (user_id)
-)
+        id bigint not null auto_increment,
+        email varchar(100),
+        first_name varchar(100),
+        last_name varchar(100),
+        password varchar(255),
+        primary key (id)
+    )
 
-alter table users  add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username)
+alter table users  add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (email)
 
 alter table service_request add constraint FKft9yx7vxsvi6s25amj2tgv9dt foreign key (contact_details_recruited_id) references contact_details (recruited_id)
 
