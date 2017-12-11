@@ -25,6 +25,8 @@ public class SkillController {
 	
 	@RequestMapping(value = "/addNewSkill", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 	public HttpStatus addNewSkill(@RequestBody Skill skill) {
+		
+		logger.debug("Entering the Controller to add new Skils");
 		skillService.addNewSkill(skill);
 		return HttpStatus.CREATED;
 		

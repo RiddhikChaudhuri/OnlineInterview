@@ -25,6 +25,7 @@ import com.riddhik.oli.service.OnlineApplication;
 
 import junit.framework.Assert;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @SpringBootTest(classes = OnlineApplication.class)

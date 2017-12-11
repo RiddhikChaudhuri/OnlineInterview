@@ -1,8 +1,6 @@
 package com.riddhik.oli.service.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,74 +9,73 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+@DynamicInsert
+@DynamicUpdate
+public class User implements Serializable {
 
-	static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8950774850260165526L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id", nullable = false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "username", nullable = false, unique = true)
-	private String username;
+	@Column(name = "first_name", length = 100)
+	private String firstName;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "last_name", length = 100)
+	private String lastName;
+
+	@Column(name = "email", length = 100)
+	private String email;
+
+	@Column(name = "password", length = 255)
 	private String password;
 
-	@Column(name = "enabled", nullable = false)
-	private boolean enabled;
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-		return authorities;
-	}
-	
-	public User(String userName,String password) {
-        this.username = userName;
-        this.password = password;
-    }
-
-	public User() {
-		super();
+	public Long getId() {
+		return id;
 	}
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// we never lock accounts
-		return true;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// credentials never expire
-		return true;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	@Override
-	public boolean isEnabled() {
-		return enabled;
+	public String getLastName() {
+		return lastName;
 	}
 
-	@Override
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
 
-	@Override
-	public String getUsername() {
-		return username;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

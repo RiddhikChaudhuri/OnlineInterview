@@ -1,26 +1,27 @@
 package com.riddhik.oli.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.riddhik.oli.service.entity.User;
 import com.riddhik.oli.service.repository.UserRepository;
+import com.riddhik.oli.service.service.UserService;
 
-@Service("userDetailsService")
-public class UserServiceImpl implements UserDetailsService {
+@Service("userService")
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	UserRepository userRepository;
+	
+	@Override
+	public User findByEmail(String emailID) {
+		return userRepository.findByEmail(emailID);
+	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return userRepository.findOneByUsername(username);
+	public void save(User user) {
+		userRepository.save(user);
+		
 	}
 
-	public void save(User user) {
-		userRepository.save(user);		
-	}
 }

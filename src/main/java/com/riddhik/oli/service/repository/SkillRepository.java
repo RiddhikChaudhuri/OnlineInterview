@@ -18,6 +18,7 @@ public interface SkillRepository extends CrudRepository<SkillEntity, Integer> {
 
 	public SkillEntity findByServiceRequestEntity(ServiceRequestEntity serviceRequestID);
 
+	@SuppressWarnings("unchecked")
 	public SkillEntity save(SkillEntity skill);
 
 	public ArrayList<SkillEntity> findBySkillName(String skillName);

@@ -1,0 +1,32 @@
+security:
+  oauth2:
+    client:
+      client-id: interview
+      client-secret: interviewsecret
+      scope: read,write
+      auto-approve-scopes: '.*'
+      
+      
+      
+facebook:
+    client:
+      clientId: 1495082267266319
+      clientSecret: 200178ada110c0e45e5825a808e17176
+      accessTokenUri: https://graph.facebook.com/oauth/access_token
+      userAuthorizationUri: https://www.facebook.com/dialog/oauth
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://graph.facebook.com/me
+      
+      
+github:
+  client:
+    clientId: 6102b72cffb08d1a1d67
+    clientSecret: 06503346ad7d42354256758ebaf255fbd316bb0e
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user

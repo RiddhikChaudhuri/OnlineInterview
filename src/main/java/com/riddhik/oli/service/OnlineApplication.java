@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 import com.riddhik.oli.service.repository.UserRepository;
-import com.riddhik.oli.service.serviceImpl.UserServiceImpl;
+import com.riddhik.oli.service.serviceImpl.UserSecurityServiceImpl;
 
 @SpringBootApplication
 public class OnlineApplication {
@@ -16,7 +16,7 @@ public class OnlineApplication {
 	}
 	
 	@Autowired
-	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repository, UserServiceImpl service) throws Exception {
+	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repository, UserSecurityServiceImpl service) throws Exception {
 		
 	}
 
