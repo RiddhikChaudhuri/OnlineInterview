@@ -19,9 +19,6 @@ import org.hibernate.validator.constraints.Email;
 @DynamicUpdate
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8950774850260165526L;
 
 	@Id
@@ -40,6 +37,19 @@ public class User implements Serializable {
 
 	@Column(name = "password", length = 255)
 	private char[] password;
+
+	public User(String firstName, String lastName, String email, char[] password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;
@@ -78,7 +88,7 @@ public class User implements Serializable {
 	}
 
 	public void setPassword(char[] password) {
-		
+
 		this.password = password;
 	}
 }

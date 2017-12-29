@@ -21,14 +21,23 @@ public class LoginController {
 
 	@RequestMapping(value = "/addNewUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 	public HttpStatus addNewUser(@RequestBody User user) {
-
 		userService.save(user);
 		return HttpStatus.CREATED;
 
 	}
 
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
-	public HttpStatus updatePassword() {
+	public HttpStatus updatePassword(@RequestBody String userName,String existingPassword,String newPassword) {
+		userService.updatePassword(userName,existingPassword,newPassword);
+		
 		return HttpStatus.ACCEPTED;
+	}
+	
+	
+	@RequestMapping(value = "/registerNewUserByGoogle", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
+	public HttpStatus registerNewUserByGoogle(@RequestBody User user) {
+		userService.save(user);
+		return HttpStatus.CREATED;
+
 	}
 }

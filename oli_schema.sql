@@ -1,13 +1,11 @@
-Hibernate:
-    drop table if exists contact_details
-Hibernate:
-    drop table if exists service_request
-Hibernate:
-    drop table if exists service_request_skills
-Hibernate:
-    drop table if exists skill
-Hibernate:
-    drop table if exists users
+use schema oli_db;
+
+drop table if exists contact_details
+drop table if exists service_request
+drop table if exists service_request_skills
+drop table if exists skill
+drop table if exists users
+
 create table contact_details (
         recruited_id integer not null auto_increment,
         company_phone integer,
@@ -53,8 +51,37 @@ create table users (
         last_name varchar(100),
         password varchar(255),
         primary key (id)
-    )
+)
+    
+create table reset_token (
+        id integer not null auto_increment,
+        expiry_date datetime,
+        token varchar(255),
+        user_id bigint not null,
+        primary key (id)
+)
 
+create table oauth_access_token (
+  token_id VARCHAR(256),
+  token BLOB,
+  authentication_id VARCHAR(256) PRIMARY KEY,
+  user_name VARCHAR(256),
+  client_id VARCHAR(256),
+  authentication BLOB,
+  refresh_token VARCHAR(256)
+)
+
+create table oauth_refresh_token (
+  token_id VARCHAR(256),
+  token BLOB,
+  authentication BLOB
+)
+
+alter table reset_token
+        add constraint FK4vxwjrcj8j479hf5iehw6qnaa
+        foreign key (user_id)
+        references users (id)
+        
 alter table users  add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (email)
 
 alter table service_request add constraint FKft9yx7vxsvi6s25amj2tgv9dt foreign key (contact_details_recruited_id) references contact_details (recruited_id)
